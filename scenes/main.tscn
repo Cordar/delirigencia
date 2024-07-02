@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bon5ux1vnmgfl"]
+
+[node name="Main" type="Node"]
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="World" type="Node2D" parent="."]

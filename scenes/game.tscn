@@ -1,0 +1,188 @@
+[gd_scene load_steps=4 format=3 uid="uid://bglrsxf1kg5ax"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_0hpx6"]
+[ext_resource type="Texture2D" uid="uid://chcxnd5eyxva6" path="res://icon.svg" id="1_sl7id"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h1fo3"]
+font_size = 86
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 8
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0hpx6")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_sl7id")
+stretch_mode = 6
+
+[node name="AltarButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -20.0
+offset_right = 22.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_sl7id")
+
+[node name="FinalStructureButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 293.0
+offset_top = -64.0
+offset_right = 421.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_sl7id")
+
+[node name="StationNewsButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -426.0
+offset_top = -64.0
+offset_right = -298.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_sl7id")
+
+[node name="FollowersLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "0
+"
+horizontal_alignment = 1
+
+[node name="MoneyLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 16.86
+offset_right = 20.0
+offset_bottom = 39.86
+grow_horizontal = 2
+text = "0
+"
+horizontal_alignment = 1
+
+[node name="UpdateResourcesTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="MessageLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+
+[node name="WinScreen" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.552956, 0.552956, 0.552956, 1)
+
+[node name="Label" type="Label" parent="WinScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -189.5
+offset_top = -59.0
+offset_right = 189.5
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "YOU WIN"
+label_settings = SubResource("LabelSettings_h1fo3")
+horizontal_alignment = 1
+
+[node name="EventScreen" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureButton" type="TextureButton" parent="EventScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -236.0
+offset_top = -211.0
+offset_right = -108.0
+offset_bottom = 205.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_sl7id")
+stretch_mode = 6
+
+[node name="TextureButton2" type="TextureButton" parent="EventScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 100.0
+offset_top = -212.0
+offset_right = 228.0
+offset_bottom = 214.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_sl7id")
+stretch_mode = 6
+
+[connection signal="pressed" from="AltarButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="FinalStructureButton" to="." method="_on_create_final_structure_pressed"]
+[connection signal="pressed" from="StationNewsButton" to="." method="_on_station_news_button_pressed"]
+[connection signal="timeout" from="UpdateResourcesTimer" to="." method="_on_update_resources_timer_timeout"]
