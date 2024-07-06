@@ -1,80 +1,113 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqpgvgfi8pk45"]
+[gd_scene load_steps=7 format=3 uid="uid://dqpgvgfi8pk45"]
 
 [ext_resource type="Script" path="res://scripts/station_doomsayers.gd" id="1_3ow5x"]
 [ext_resource type="Texture2D" uid="uid://673o75iw6jih" path="res://assets/images/doomsayer0.png" id="1_au84e"]
 
-[sub_resource type="Animation" id="Animation_o6487"]
-resource_name = "idle"
-length = 0.8
+[sub_resource type="Animation" id="Animation_j8gsb"]
+resource_name = "build"
+length = 0.4
 loop_mode = 1
-step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
+tracks/0/path = NodePath("Image:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0.5, 0.5), Vector2(0.48, 0.52), Vector2(0.5, 0.5), Vector2(0.52, 0.48), Vector2(0.5, 0.5)]
+"values": [Vector2(1, 1), Vector2(1.05, 0.95), Vector2(1, 1), Vector2(0.95, 1.05), Vector2(1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_kpp3y"]
+[sub_resource type="Animation" id="Animation_2xuls"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
+tracks/0/path = NodePath("Image:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0.5, 0.5)]
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Image:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 35)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Image:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_krt8p"]
+[sub_resource type="Animation" id="Animation_m3nfc"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Image:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 35), Vector2(-150, 35), Vector2(0, 35), Vector2(150, 35), Vector2(0, 35)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Image:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1d56v"]
 _data = {
-"RESET": SubResource("Animation_kpp3y"),
-"idle": SubResource("Animation_o6487")
+"RESET": SubResource("Animation_2xuls"),
+"build": SubResource("Animation_j8gsb"),
+"idle": SubResource("Animation_m3nfc")
 }
 
-[node name="StationDoomsayers" type="Control"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 351.0
-offset_bottom = 435.0
+[node name="StationDoomsayers" type="TextureButton"]
+offset_right = 500.0
+offset_bottom = 570.0
+scale = Vector2(0.5, 0.5)
+ignore_texture_size = true
+stretch_mode = 5
 script = ExtResource("1_3ow5x")
 
-[node name="Button" type="TextureButton" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.483
-anchor_right = 0.5
-anchor_bottom = 0.483
-offset_left = -113.5
-offset_top = -133.105
-offset_right = 386.5
-offset_bottom = 366.895
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.5, 0.5)
-texture_normal = ExtResource("1_au84e")
-
 [node name="ProgressBar" type="ProgressBar" parent="."]
-visible = false
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -168.5
-offset_top = 51.0
-offset_right = 168.5
-offset_bottom = 95.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 56.0
 grow_horizontal = 2
 show_percentage = false
 
@@ -83,21 +116,41 @@ one_shot = true
 
 [node name="Cost" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
-offset_top = 75.0
-offset_bottom = 112.0
+anchor_bottom = 1.0
+offset_top = -37.0
+offset_right = 14.0
+offset_bottom = 24.0
 grow_horizontal = 2
+grow_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 48
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Image" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_au84e")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Button")
 libraries = {
-"": SubResource("AnimationLibrary_krt8p")
+"": SubResource("AnimationLibrary_1d56v")
 }
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="mouse_entered" from="." to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_button_pressed"]

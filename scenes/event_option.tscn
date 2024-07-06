@@ -1,54 +1,60 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctu5cq48qgh3c"]
+[gd_scene load_steps=6 format=3 uid="uid://ctu5cq48qgh3c"]
 
 [ext_resource type="Script" path="res://scripts/event_option.gd" id="1_srgsj"]
 [ext_resource type="Texture2D" uid="uid://chcxnd5eyxva6" path="res://icon.svg" id="2_hyibh"]
+[ext_resource type="Texture2D" uid="uid://bukycdktmfmby" path="res://assets/images/paper.png" id="2_iqm01"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_akoy3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_soo68"]
 
 [node name="EventOption" type="Control"]
 layout_mode = 3
+anchors_preset = 0
+offset_right = 874.0
+offset_bottom = 1080.0
+script = ExtResource("1_srgsj")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1389.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_srgsj")
+texture = ExtResource("2_iqm01")
+expand_mode = 5
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -257.5
-offset_top = 59.0
-offset_right = 252.5
-offset_bottom = 113.0
+offset_left = -282.0
+offset_top = 557.0
+offset_right = 253.0
+offset_bottom = 611.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 32
 text = "Title Example"
 horizontal_alignment = 1
 
 [node name="Description" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = -441.0
-offset_right = -17.0
-offset_bottom = -108.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = 113.0
+offset_right = 287.0
+offset_bottom = 452.0
 grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/font_size = 24
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
 text = "Un hombre en su casa descubre la realidad del planeta y esa misma tarde…
-
-Manoli: Antonio va, ve a pasear, ya sabes que el médico…
-
-Antonio: MANOLI CÓMO VOY A IR A PASEAR??! Es que no te has enterado de la verdad??? La tierra es plana si salgo a caminar podría caerme!
-
-Manoli: Y donde está el problema… Así te da el aire…
-
-Antonio: *surprised Pikachu Face*"
+"
 autowrap_mode = 3
 
 [node name="Image" type="TextureRect" parent="."]
@@ -57,10 +63,10 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -2.0
-offset_top = -395.0
-offset_right = 10.0
-offset_bottom = 81.0
+offset_left = 122.0
+offset_top = -391.0
+offset_right = -122.0
+offset_bottom = -91.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_hyibh")
@@ -72,12 +78,15 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 57.0
-offset_top = -162.0
-offset_right = -41.0
-offset_bottom = -87.0
+offset_left = 71.0
+offset_top = -1019.0
+offset_right = -68.0
+offset_bottom = -73.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Seleccionar"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_akoy3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_soo68")
 
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

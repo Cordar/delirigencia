@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://su168oy56nk6"
-path="res://.godot/imported/doomsayer.png-ac391d44d351c8bb259eb9d65bd58ca4.ctex"
+path="res://.godot/imported/doomsayer1.png-c83b9daa2b45241c63ae46ed3e1dae7b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/doomsayer.png"
-dest_files=["res://.godot/imported/doomsayer.png-ac391d44d351c8bb259eb9d65bd58ca4.ctex"]
+source_file="res://assets/images/doomsayer1.png"
+dest_files=["res://.godot/imported/doomsayer1.png-c83b9daa2b45241c63ae46ed3e1dae7b.ctex"]
 
 [params]
 

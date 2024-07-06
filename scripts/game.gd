@@ -26,17 +26,11 @@ var texture_altar1 = load("res://assets/images/altar1.png")
 var texture_altar2 = load("res://assets/images/altar2.png")
 var texture_altar3 = load("res://assets/images/altar3.png")
 
-var money_display_tween
-
-var audio_player
-
 func _ready():
-	followers_label = get_node("FollowersLabel")
-	followers_label.text = "Followers: " + str(Globals.followers)
-	follower_second_label = get_node("FollowersSecondLabel")
-	money_label = get_node("MoneyLabel")
-	money_second_label = get_node("MoneySecondLabel")
-	money_label.text = "Money: " + str(Globals.money)
+	followers_label = get_node("InfoPanel/FollowersLabel")
+	follower_second_label = get_node("InfoPanel/FollowersSecondLabel")
+	money_label = get_node("InfoPanel/MoneyLabel")
+	money_second_label = get_node("InfoPanel/MoneySecondLabel")
 	message_label = get_node("MessageLabel")
 
 	win_screen = get_node("WinScreen")
@@ -52,8 +46,6 @@ func _ready():
 	station_church_cost_label = get_node("StationChurchButton/Cost")
 	station_church_cost_label.set_text(str(get_upgrade_church_cost()))
 	set_church_labels()
-
-	audio_player = get_node("AudioSound")
 	game_running = false
 
 	set_intro()
@@ -68,8 +60,12 @@ func add_follower(quantity):
 	set_follower_label(Globals.followers)
 
 func set_follower_label(quantity):
-	followers_label.text = "Seguidores: %d" % floor(quantity)
-	follower_second_label.text = "(+%d)" % (Globals.station_doomsayers_level * Globals.follower_multiplier)
+	followers_label.text = "%s" % format(floor(quantity))
+	var generation_second = Globals.station_doomsayers_level * Globals.follower_multiplier
+	if generation_second > 0:
+		follower_second_label.text = "(+%d)" % generation_second
+	else:
+		follower_second_label.text = "(%d)" % generation_second
 
 func add_money(quantity):
 	Globals.money += quantity
@@ -84,7 +80,7 @@ func add_money_gradually(quantity):
 
 func set_money_label(quantity):
 	var rounded_number = int(round(quantity))
-	money_label.text = "Locucoins: %s" % format(rounded_number)
+	money_label.text = "%s" % format(rounded_number)
 
 func set_message(message):
 	message_label.text = message
@@ -114,7 +110,7 @@ func set_church_texture():
 	station_church_button.set_texture_normal(selected_texture)
 
 func set_church_labels():
-	station_church_cost_label.set_text("%s €, %s Seguidores" % [get_upgrade_church_cost(), get_upgrade_church_cost_followers()])
+	station_church_cost_label.set_text("%s Lc, %s Seguidores" % [format(get_upgrade_church_cost()), format(get_upgrade_church_cost_followers())])
 
 func upgrade_church(wait_time):
 	var cost = get_upgrade_church_cost()
@@ -360,6 +356,7 @@ func _on_initial_interview_item_clicked(index, _at_position, _mouse_button_index
 	set_next_intro_question()
 
 func _on_button_pressed():
+	Globals.reset()
 	get_tree().reload_current_scene()
 
 func _on_button_2_pressed():
@@ -395,3 +392,12 @@ func _on_station_news_upgrade_succeeded(cost):
 	add_money(-cost)
 	var select_event_screen = SelectEventScreen.instantiate()
 	add_child(select_event_screen)
+
+
+func _on_station_church_button_mouse_entered():
+	Globals.play_hover_sound()
+	station_church_button.set_scale(Vector2(1.02, 1.02))
+
+
+func _on_station_church_button_mouse_exited():
+	station_church_button.set_scale(Vector2(1, 1))

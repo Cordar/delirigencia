@@ -16,9 +16,6 @@ func _ready():
 	set_texture()
 	set_labels_text()
 
-func _process(delta):
-	pass
-
 func get_upgrade_cost():
 	return (Globals.station_news_level + 5) * pow(2, Globals.station_news_level + 1) * 100
 
@@ -47,4 +44,27 @@ func set_texture():
 		button.set_texture_normal(texture3)
 
 func set_labels_text():
-	cost_label.set_text("%s €" % get_upgrade_cost())
+	cost_label.set_text("%s Lc" % format(get_upgrade_cost()))
+
+
+func _on_button_mouse_entered():
+	Globals.play_hover_sound()
+	self.set_scale(Vector2(1.01, 1.01))
+
+func _on_button_mouse_exited():
+	self.set_scale(Vector2(1, 1))
+
+func format(n):
+	n = str(n)
+	var n_size = n.length()
+	var s = ""
+	
+	for i in range(n_size):
+		if not n[i]:
+			continue
+		if((n_size - i) % 3 == 0 and i > 0):
+			s = str(s,",", n[i])
+		else:
+			s = str(s,n[i])
+			
+	return s

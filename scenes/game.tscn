@@ -1,14 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://bglrsxf1kg5ax"]
+[gd_scene load_steps=12 format=3 uid="uid://bglrsxf1kg5ax"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_0hpx6"]
+[ext_resource type="FontFile" uid="uid://jxbyonhtwfel" path="res://assets/fonts/Chewy-Regular.ttf" id="1_mathn"]
 [ext_resource type="Texture2D" uid="uid://76jg1od4e6df" path="res://assets/images/background.png" id="2_ggc55"]
 [ext_resource type="Texture2D" uid="uid://d4fncs4xuglm4" path="res://assets/images/altar3.png" id="3_npkoi"]
 [ext_resource type="PackedScene" uid="uid://btcgq3hpr5gs8" path="res://scenes/station_news.tscn" id="4_1wf2w"]
 [ext_resource type="PackedScene" uid="uid://dqpgvgfi8pk45" path="res://scenes/station_doomsayers.tscn" id="5_hw7ax"]
 [ext_resource type="AudioStream" uid="uid://bswxuml05ieji" path="res://assets/music/music_delirigencia.wav" id="6_s5svw"]
+[ext_resource type="Texture2D" uid="uid://dcqtwsgmouctb" path="res://assets/images/followeicon.png" id="7_hsynj"]
+[ext_resource type="Texture2D" uid="uid://bnb0aw6pbiouu" path="res://assets/images/moneyicon.png" id="9_v4ayh"]
+
+[sub_resource type="Theme" id="Theme_mqphj"]
+default_font = ExtResource("1_mathn")
 
 [sub_resource type="LabelSettings" id="LabelSettings_h1fo3"]
-font_size = 32
+font_size = 48
 outline_size = 3
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 8
@@ -20,6 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_mqphj")
 script = ExtResource("1_0hpx6")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -92,74 +99,11 @@ offset_right = 700.0
 offset_bottom = 994.0
 
 [node name="StationDoomsayers" parent="." instance=ExtResource("5_hw7ax")]
-offset_left = 1240.0
-offset_top = 126.0
-offset_right = 1780.0
-offset_bottom = 657.0
-
-[node name="FollowersLabel" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 679.0
-offset_top = 380.0
-offset_right = 809.0
-offset_bottom = 406.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-horizontal_alignment = 1
-
-[node name="FollowersSecondLabel" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 712.0
-offset_top = 395.0
-offset_right = 777.0
-offset_bottom = 421.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-horizontal_alignment = 1
-
-[node name="MoneyLabel" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 681.0
-offset_top = 429.0
-offset_right = 811.0
-offset_bottom = 455.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-horizontal_alignment = 1
-
-[node name="MoneySecondLabel" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 684.5
-offset_top = 449.0
-offset_right = 807.5
-offset_bottom = 475.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-horizontal_alignment = 1
+layout_mode = 0
+offset_left = 1414.0
+offset_top = 235.0
+offset_right = 1914.0
+offset_bottom = 805.0
 
 [node name="UpdateResourcesTimer" type="Timer" parent="."]
 
@@ -199,10 +143,10 @@ anchor_bottom = 0.5
 offset_left = -523.0
 offset_top = -269.0
 offset_right = 509.0
-offset_bottom = -148.0
+offset_bottom = -118.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "YOU WIN"
+text = "QUESTION?"
 label_settings = SubResource("LabelSettings_h1fo3")
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -214,13 +158,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -426.0
-offset_top = -63.0
-offset_right = 430.0
-offset_bottom = 66.0
+offset_left = -672.0
+offset_top = -101.0
+offset_right = 676.0
+offset_bottom = 130.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 32
 max_text_lines = 2
 auto_height = true
 text_overrun_behavior = 0
@@ -248,16 +192,25 @@ offset_right = 189.5
 offset_bottom = 59.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "YOU LOSE
+text = "Tu secta ha sido un fracaso
 "
 label_settings = SubResource("LabelSettings_h1fo3")
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="GameOverScreen"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-text = "Restart"
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.0
+offset_top = 9.5
+offset_right = 58.0
+offset_bottom = 38.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "No es más fuerte el que menos cae, sino el que más veces se levanta."
 
 [node name="WinScreen" type="ColorRect" parent="."]
 visible = false
@@ -282,15 +235,124 @@ offset_right = 189.5
 offset_bottom = 59.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "YOU WIN"
+text = "El mundo se ha vuelto loco y te has lucrado por ello. Enhorabuena?"
 label_settings = SubResource("LabelSettings_h1fo3")
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="WinScreen"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-text = "Restart"
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.5
+offset_top = 17.5
+offset_right = 27.5
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Has tenido suerte esta vez, quieres volver a fracasar? Pulsa aquí"
+
+[node name="InfoPanel" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 376.0
+offset_bottom = 190.0
+
+[node name="ColorRect" type="ColorRect" parent="InfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.870588)
+
+[node name="FollowersIcon" type="TextureRect" parent="InfoPanel"]
+layout_mode = 1
+offset_right = 105.0
+offset_bottom = 92.0
+texture = ExtResource("7_hsynj")
+expand_mode = 2
+
+[node name="MoneyIcon" type="TextureRect" parent="InfoPanel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -10.0
+offset_right = 105.0
+offset_bottom = 95.0
+grow_vertical = 2
+texture = ExtResource("9_v4ayh")
+expand_mode = 2
+
+[node name="FollowersLabel" type="Label" parent="InfoPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -80.0
+offset_right = 162.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "0"
+clip_text = true
+
+[node name="FollowersSecondLabel" type="Label" parent="InfoPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -45.0
+offset_right = 170.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "(+0)"
+
+[node name="MoneyLabel" type="Label" parent="InfoPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = 20.0
+offset_right = 162.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="MoneySecondLabel" type="Label" parent="InfoPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = 54.0
+offset_right = 161.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "(+0)"
 
 [node name="AudioMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_s5svw")
@@ -299,11 +361,11 @@ autoplay = true
 
 [node name="AudioSound" type="AudioStreamPlayer" parent="."]
 
+[connection signal="mouse_entered" from="StationChurchButton" to="." method="_on_station_church_button_mouse_entered"]
+[connection signal="mouse_exited" from="StationChurchButton" to="." method="_on_station_church_button_mouse_exited"]
 [connection signal="pressed" from="StationChurchButton" to="." method="_on_create_final_structure_pressed"]
 [connection signal="upgrade_failed" from="StationNews" to="." method="_on_station_news_upgrade_failed"]
 [connection signal="upgrade_succeeded" from="StationNews" to="." method="_on_station_news_upgrade_succeeded"]
-[connection signal="upgrade_failed" from="StationDoomsayers" to="." method="_on_station_doomsayers_upgrade_failed"]
-[connection signal="upgrade_succeeded" from="StationDoomsayers" to="." method="_on_station_doomsayers_upgrade_succeeded"]
 [connection signal="timeout" from="UpdateResourcesTimer" to="." method="_on_update_resources_timer_timeout"]
 [connection signal="item_clicked" from="IntroScreen/InitialInterview" to="." method="_on_initial_interview_item_clicked"]
 [connection signal="pressed" from="GameOverScreen/Button" to="." method="_on_button_pressed"]
