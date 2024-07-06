@@ -1,16 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://bglrsxf1kg5ax"]
+[gd_scene load_steps=8 format=3 uid="uid://bglrsxf1kg5ax"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_0hpx6"]
-[ext_resource type="Texture2D" uid="uid://chcxnd5eyxva6" path="res://icon.svg" id="1_sl7id"]
+[ext_resource type="Texture2D" uid="uid://76jg1od4e6df" path="res://assets/images/background.png" id="2_ggc55"]
+[ext_resource type="Texture2D" uid="uid://d4fncs4xuglm4" path="res://assets/images/altar3.png" id="3_npkoi"]
+[ext_resource type="PackedScene" uid="uid://btcgq3hpr5gs8" path="res://scenes/station_news.tscn" id="4_1wf2w"]
+[ext_resource type="PackedScene" uid="uid://dqpgvgfi8pk45" path="res://scenes/station_doomsayers.tscn" id="5_hw7ax"]
+[ext_resource type="AudioStream" uid="uid://bswxuml05ieji" path="res://assets/music/music_delirigencia.wav" id="6_s5svw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_h1fo3"]
 font_size = 32
 outline_size = 3
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 8
-
-[sub_resource type="LabelSettings" id="LabelSettings_illo4"]
-font_size = 32
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -28,40 +29,185 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_sl7id")
-stretch_mode = 6
+texture = ExtResource("2_ggc55")
+expand_mode = 2
 
-[node name="AltarButton" type="TextureButton" parent="."]
+[node name="StationChurchButton" type="TextureButton" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -18.0
-offset_top = -20.0
-offset_right = 22.0
-offset_bottom = 20.0
+offset_left = -156.0
+offset_top = -290.0
+offset_right = 166.0
+offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("1_sl7id")
+texture_normal = ExtResource("3_npkoi")
+ignore_texture_size = true
+stretch_mode = 0
 
-[node name="FinalStructureButton" type="TextureButton" parent="."]
+[node name="ProgressBar" type="ProgressBar" parent="StationChurchButton"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -164.0
+offset_top = 326.0
+offset_right = 153.0
+offset_bottom = 353.0
+grow_horizontal = 2
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="StationChurchButton"]
+one_shot = true
+
+[node name="Cost" type="Label" parent="StationChurchButton"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -490.0
+offset_top = -429.0
+offset_right = 164.0
+offset_bottom = -362.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Coste: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="StationNews" parent="." instance=ExtResource("4_1wf2w")]
+offset_left = 179.0
+offset_top = 393.0
+offset_right = 700.0
+offset_bottom = 994.0
+
+[node name="StationDoomsayers" parent="." instance=ExtResource("5_hw7ax")]
+offset_left = 1240.0
+offset_top = 126.0
+offset_right = 1780.0
+offset_bottom = 657.0
+
+[node name="FollowersLabel" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 293.0
-offset_top = -64.0
-offset_right = 421.0
-offset_bottom = 64.0
+offset_left = 679.0
+offset_top = 380.0
+offset_right = 809.0
+offset_bottom = 406.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("1_sl7id")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
 
-[node name="StationNewsButton" type="TextureButton" parent="."]
+[node name="FollowersSecondLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 712.0
+offset_top = 395.0
+offset_right = 777.0
+offset_bottom = 421.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+
+[node name="MoneyLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 681.0
+offset_top = 429.0
+offset_right = 811.0
+offset_bottom = 455.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+
+[node name="MoneySecondLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 684.5
+offset_top = 449.0
+offset_right = 807.5
+offset_bottom = 475.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+
+[node name="UpdateResourcesTimer" type="Timer" parent="."]
+
+[node name="MessageLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -432.0
+offset_top = -85.0
+offset_right = 436.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+
+[node name="IntroScreen" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="QuestionLabel" type="Label" parent="IntroScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -523.0
+offset_top = -269.0
+offset_right = 509.0
+offset_bottom = -148.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "YOU WIN"
+label_settings = SubResource("LabelSettings_h1fo3")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="InitialInterview" type="ItemList" parent="IntroScreen"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -69,64 +215,49 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -426.0
-offset_top = -64.0
-offset_right = -298.0
-offset_bottom = 64.0
+offset_top = -63.0
+offset_right = 430.0
+offset_bottom = 66.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("1_sl7id")
+theme_override_font_sizes/font_size = 16
+max_text_lines = 2
+auto_height = true
+text_overrun_behavior = 0
 
-[node name="FollowersLabel" type="Label" parent="."]
+[node name="GameOverScreen" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
-grow_horizontal = 2
-text = "
-"
-horizontal_alignment = 1
-
-[node name="MoneyLabel" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_top = 16.86
-offset_right = 20.0
-offset_bottom = 39.86
-grow_horizontal = 2
-text = "
-"
-horizontal_alignment = 1
-
-[node name="MoneySecondLabel" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.603
-anchor_right = 0.603
-offset_left = -19.6561
-offset_top = 16.0
-offset_right = 20.3439
-offset_bottom = 42.0
-grow_horizontal = 2
-text = "
-"
-horizontal_alignment = 1
-
-[node name="UpdateResourcesTimer" type="Timer" parent="."]
-
-[node name="MessageLabel" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
+anchors_preset = 15
 anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 23.0
-grow_horizontal = 0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.552956, 0.552956, 0.552956, 1)
+
+[node name="Label" type="Label" parent="GameOverScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -189.5
+offset_top = -59.0
+offset_right = 189.5
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "YOU LOSE
+"
+label_settings = SubResource("LabelSettings_h1fo3")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="GameOverScreen"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Restart"
 
 [node name="WinScreen" type="ColorRect" parent="."]
 visible = false
@@ -155,146 +286,25 @@ text = "YOU WIN"
 label_settings = SubResource("LabelSettings_h1fo3")
 horizontal_alignment = 1
 
-[node name="IntroScreen" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
+[node name="Button" type="Button" parent="WinScreen"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Restart"
 
-[node name="QuestionLabel" type="Label" parent="IntroScreen"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -523.0
-offset_top = -269.0
-offset_right = 509.0
-offset_bottom = -148.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "YOU WIN"
-label_settings = SubResource("LabelSettings_h1fo3")
-horizontal_alignment = 1
-autowrap_mode = 1
+[node name="AudioMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_s5svw")
+volume_db = -15.0
+autoplay = true
 
-[node name="InitialInterview" type="ItemList" parent="IntroScreen"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -426.0
-offset_top = -63.0
-offset_right = 430.0
-offset_bottom = 66.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 16
-max_text_lines = 2
-auto_height = true
-text_overrun_behavior = 0
+[node name="AudioSound" type="AudioStreamPlayer" parent="."]
 
-[node name="EventScreen" type="ColorRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Event1" type="TextureButton" parent="EventScreen"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -416.0
-offset_top = -211.0
-offset_right = -98.0
-offset_bottom = 205.0
-grow_horizontal = 2
-grow_vertical = 2
-texture_normal = ExtResource("1_sl7id")
-stretch_mode = 6
-
-[node name="Title" type="Label" parent="EventScreen/Event1"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 35.0
-grow_horizontal = 2
-text = "awdawdawdawadw"
-label_settings = SubResource("LabelSettings_illo4")
-horizontal_alignment = 1
-
-[node name="Description" type="Label" parent="EventScreen/Event1"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = 22.0
-offset_bottom = 204.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "esta es una descripcion larga de algo que hay que hacer pero no se exactametne el que"
-horizontal_alignment = 3
-autowrap_mode = 3
-
-[node name="Event2" type="TextureButton" parent="EventScreen"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 100.0
-offset_top = -212.0
-offset_right = 444.0
-offset_bottom = 214.0
-grow_horizontal = 2
-grow_vertical = 2
-texture_normal = ExtResource("1_sl7id")
-stretch_mode = 6
-
-[node name="Title" type="Label" parent="EventScreen/Event2"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 35.0
-grow_horizontal = 2
-text = "awdawdawdawadw"
-label_settings = SubResource("LabelSettings_illo4")
-horizontal_alignment = 1
-
-[node name="Description" type="Label" parent="EventScreen/Event2"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = 22.0
-offset_bottom = 204.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "esta es una descripcion larga de algo que hay que hacer pero no se exactametne el que"
-horizontal_alignment = 3
-autowrap_mode = 3
-
-[connection signal="pressed" from="AltarButton" to="." method="_on_texture_button_pressed"]
-[connection signal="pressed" from="FinalStructureButton" to="." method="_on_create_final_structure_pressed"]
-[connection signal="pressed" from="StationNewsButton" to="." method="_on_station_news_button_pressed"]
+[connection signal="pressed" from="StationChurchButton" to="." method="_on_create_final_structure_pressed"]
+[connection signal="upgrade_failed" from="StationNews" to="." method="_on_station_news_upgrade_failed"]
+[connection signal="upgrade_succeeded" from="StationNews" to="." method="_on_station_news_upgrade_succeeded"]
+[connection signal="upgrade_failed" from="StationDoomsayers" to="." method="_on_station_doomsayers_upgrade_failed"]
+[connection signal="upgrade_succeeded" from="StationDoomsayers" to="." method="_on_station_doomsayers_upgrade_succeeded"]
 [connection signal="timeout" from="UpdateResourcesTimer" to="." method="_on_update_resources_timer_timeout"]
 [connection signal="item_clicked" from="IntroScreen/InitialInterview" to="." method="_on_initial_interview_item_clicked"]
-[connection signal="pressed" from="EventScreen/Event1" to="." method="_on_event_1_pressed"]
-[connection signal="pressed" from="EventScreen/Event2" to="." method="_on_event_2_pressed"]
+[connection signal="pressed" from="GameOverScreen/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="WinScreen/Button" to="." method="_on_button_pressed"]
