@@ -57,10 +57,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -156.0
-offset_top = -290.0
-offset_right = 166.0
-offset_bottom = 32.0
+offset_left = -119.0
+offset_top = -216.0
+offset_right = 134.0
+offset_bottom = 37.0
 grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("3_npkoi")
@@ -73,10 +73,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -164.0
-offset_top = 326.0
-offset_right = 153.0
-offset_bottom = 353.0
+offset_left = -164.5
+offset_top = 251.0
+offset_right = 152.5
+offset_bottom = 278.0
 grow_horizontal = 2
 show_percentage = false
 
@@ -90,10 +90,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -490.0
-offset_top = -429.0
-offset_right = 164.0
-offset_bottom = -362.0
+offset_left = -455.0
+offset_top = -304.0
+offset_right = 199.0
+offset_bottom = -237.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -104,17 +104,32 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="StationNews" parent="." instance=ExtResource("4_1wf2w")]
-offset_left = 229.0
-offset_top = 427.0
-offset_right = 660.0
-offset_bottom = 951.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -551.0
+offset_top = -472.0
+offset_right = -120.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="StationDoomsayers" parent="." instance=ExtResource("5_hw7ax")]
-layout_mode = 0
-offset_left = 1372.0
-offset_top = 307.0
-offset_right = 1852.0
-offset_bottom = 873.0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -394.0
+offset_top = -221.0
+offset_right = 86.0
+offset_bottom = 345.0
+grow_horizontal = 0
+grow_vertical = 2
 
 [node name="UpdateResourcesTimer" type="Timer" parent="."]
 
@@ -132,7 +147,6 @@ offset_bottom = -14.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("7_jp2h3")
 theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 
@@ -153,9 +167,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -762.0
+offset_left = -500.0
 offset_top = -131.0
-offset_right = 794.0
+offset_right = 504.0
 offset_bottom = -47.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -171,21 +185,22 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -861.0
+offset_left = -591.0
 offset_top = 12.0
-offset_right = 875.0
-offset_bottom = 101.0
+offset_right = 595.0
+offset_bottom = 125.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("7_jp2h3")
-theme_override_font_sizes/font_size = 30
-max_text_lines = 2
+theme_override_font_sizes/font_size = 24
+max_text_lines = 3
 auto_height = true
-text_overrun_behavior = 0
+item_count = 1
+item_0/text = "adawd awd awd awd awdffawd awdawd awdawdawda aw awd aw awdawdaaw aw aw dawaw daw awd aw ad awd "
 
 [node name="InfoPanel" type="Control" parent="."]
 anchors_preset = 0
-offset_right = 376.0
+offset_right = 367.0
 offset_bottom = 190.0
 
 [node name="ColorRect" type="ColorRect" parent="InfoPanel"]

@@ -431,7 +431,9 @@ func _on_powerup_picked_up():
 
 func _on_powerup_timer_timeout():
 	var powerup = PowerUp.instantiate()
-	powerup.set_position(Vector2(2000, randi() % 800 + 100))
+	DisplayServer.window_get_size()
+	var screen_size = get_viewport().get_visible_rect().size
+	powerup.set_position(Vector2(int(screen_size.x) + 1, randi() % int(screen_size.y) + 100))
 	powerup.set_scale(Vector2(0.5, 0.5))
 	powerup.speed = (randi() % 30) + 200
 	powerup.picked_up.connect(_on_powerup_picked_up)

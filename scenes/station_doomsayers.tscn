@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dqpgvgfi8pk45"]
+[gd_scene load_steps=13 format=3 uid="uid://dqpgvgfi8pk45"]
 
 [ext_resource type="Script" path="res://scripts/station_doomsayers.gd" id="1_3ow5x"]
 [ext_resource type="Texture2D" uid="uid://673o75iw6jih" path="res://assets/images/doomsayer0.png" id="1_au84e"]
@@ -93,15 +93,11 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
-[sub_resource type="Animation" id="Animation_0rbin"]
-resource_name = "static"
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1d56v"]
 _data = {
 "RESET": SubResource("Animation_2xuls"),
 "build": SubResource("Animation_j8gsb"),
-"idle": SubResource("Animation_m3nfc"),
-"static": SubResource("Animation_0rbin")
+"idle": SubResource("Animation_m3nfc")
 }
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_d2jth"]
@@ -171,7 +167,6 @@ grow_vertical = 2
 texture = ExtResource("1_au84e")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "static"
 libraries = {
 "": SubResource("AnimationLibrary_1d56v")
 }

@@ -26,15 +26,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -914.0
-offset_top = 142.0
-offset_right = 849.0
-offset_bottom = 260.0
+offset_left = -662.0
+offset_top = 104.0
+offset_right = 654.0
+offset_bottom = 244.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "El mundo se ha vuelto loco y te has lucrado por ello. ¿Enhorabuena?"
 label_settings = SubResource("LabelSettings_h1fo3")
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
@@ -64,10 +65,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -514.0
-offset_top = -503.0
-offset_right = 610.0
-offset_bottom = 210.0
+offset_left = -357.0
+offset_top = -280.0
+offset_right = 363.0
+offset_bottom = 177.0
 
 [connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
