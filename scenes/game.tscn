@@ -359,8 +359,6 @@ stream = ExtResource("6_s5svw")
 volume_db = -15.0
 autoplay = true
 
-[node name="AudioSound" type="AudioStreamPlayer" parent="."]
-
 [connection signal="mouse_entered" from="StationChurchButton" to="." method="_on_station_church_button_mouse_entered"]
 [connection signal="mouse_exited" from="StationChurchButton" to="." method="_on_station_church_button_mouse_exited"]
 [connection signal="pressed" from="StationChurchButton" to="." method="_on_create_final_structure_pressed"]

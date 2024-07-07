@@ -17,12 +17,15 @@ func _ready():
 	set_labels_text()
 
 func get_upgrade_cost():
-	return (Globals.station_news_level + 5) * pow(2, Globals.station_news_level + 1) * 100
+	return (Globals.station_news_level + 5) * pow(4, Globals.station_news_level + 1) * 100
 
 func _on_button_pressed():
 	var cost = get_upgrade_cost()
 	if Globals.money < cost:
 		upgrade_failed.emit()
+		Globals.play_error_sound()
+		return
+	if Globals.station_news_level == 7:
 		Globals.play_error_sound()
 		return
 
@@ -36,15 +39,17 @@ func set_texture():
 	var level = Globals.station_news_level
 	if level == 0:
 		button.set_texture_normal(texture0)
-	elif level == 3:
+	elif level == 1:
 		button.set_texture_normal(texture1)
-	elif level == 5:
+	elif level == 3:
 		button.set_texture_normal(texture2)
-	else:
+	elif level == 5:
 		button.set_texture_normal(texture3)
 
 func set_labels_text():
 	cost_label.set_text("%s Lc" % format(get_upgrade_cost()))
+	if Globals.station_news_level == 7:
+		cost_label.set_text("Máximo nivel alcanzado.")
 
 
 func _on_button_mouse_entered():

@@ -104,6 +104,7 @@ stretch_mode = 5
 script = ExtResource("1_3ow5x")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0

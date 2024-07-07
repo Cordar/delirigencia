@@ -12,6 +12,7 @@ var selected_event
 var texture_moon = preload("res://assets/images/event_moon.png")
 var texture_5g = preload("res://assets/images/event_5G.png")
 var texture_vaccine = preload("res://assets/images/event_vaccine.png")
+var texture_cats = preload("res://assets/images/event_cats.png")
 
 
 func _ready():
@@ -24,22 +25,30 @@ func _ready():
 	option1.visible = true
 	option2.visible = true
 
-	
-	var event1_number = randi() % len(events)
-	var event2_number = randi() % len(events)
-	while event1_number == event2_number:
-		event2_number = randi() % len(events)
+	if len(Globals.already_selected_events) == len(events):
+		print("no more events")
+		queue_free()
+	else:
+		var event1_number = randi() % len(events)
+		while event1_number in Globals.already_selected_events:
+			event1_number = randi() % len(events)
+		Globals.already_selected_events.append(event1_number)
+		
+		var event2_number = randi() % len(events)
+		while event2_number in Globals.already_selected_events:
+			event2_number = randi() % len(events)
+		Globals.already_selected_events.append(event2_number)
 
-	option1_info = events[event1_number]
-	option2_info = events[event2_number]
-	option1.set_title(option1_info.title)
-	option1.set_description(option1_info.description)
-	if option1_info.image:
-		option1.set_image(option1_info.image)
-	option2.set_title(option2_info.title)
-	option2.set_description(option2_info.description)
-	if option2_info.image:
-		option2.set_image(option2_info.image)
+		option1_info = events[event1_number]
+		option2_info = events[event2_number]
+		option1.set_title(option1_info.title)
+		option1.set_description(option1_info.description)
+		if option1_info.image:
+			option1.set_image(option1_info.image)
+		option2.set_title(option2_info.title)
+		option2.set_description(option2_info.description)
+		if option2_info.image:
+			option2.set_image(option2_info.image)
 
 func _process(_delta):
 	pass
@@ -71,9 +80,9 @@ func apply_effect():
 
 	var id = selected_event.id
 	if id == 0:
-		Globals.follower_multiplier *= 20
+		Globals.follower_multiplier *= 15
 	elif id == 1:
-		Globals.follower_multiplier *= 50
+		Globals.follower_multiplier *= 30
 	elif id == 2:
 		Globals.follower_multiplier *= -1
 		await get_tree().create_timer(10.0).timeout
@@ -91,13 +100,13 @@ func apply_effect():
 	elif id == 7:
 		Globals.follower_multiplier *= 3
 	elif id == 8:
-		Globals.follower_multiplier *= 100
+		Globals.follower_multiplier *= 50
 	elif id == 9:
-		Globals.follower_multiplier *= 200
+		Globals.follower_multiplier *= 100
 	elif id == 10:
 		Globals.follower_multiplier *= 0.1
 	elif id == 11:
-		Globals.follower_multiplier *= 20
+		Globals.follower_multiplier *= 15
 	elif id == 12:
 		Globals.money += 666666666
 	elif id == 13:
@@ -132,13 +141,9 @@ var events = [
 		description = "Compras a un prestigioso programa de televisión para que emitan una serie de cinco capítulos sobre el control gubernamental que pretenden esconder detrás de los supuestos beneficios del 5G. La globalización es una tapadera…",
 		image = texture_5g,
 		effect = "Man1: Hey, mira este serión que he visto en freeflix! habla sobre cómo un grupo de adolescentes superdotados conocen a la élite mundial y descubren la verdad, no te imaginarias lo que pasa… Si quieres te lo cuento, aunque es spoiler…
-
 Man2:No tío mejor n…
-
 MAN1: BUENO VALE TE LO DIGO NO HACE FALTA QUE INSISTAS RESULTA QUE EL 5G NOS CONTROLA!!! ESTAMOS PERDIDOS!!!
-
 Man2: ._. mierda…
-
 Ganas seguidores un poco más rápido."
 	},
 	{

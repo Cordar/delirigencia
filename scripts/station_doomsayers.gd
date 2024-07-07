@@ -31,6 +31,8 @@ func _process(_delta):
 
 func set_labels():
 	cost_label.set_text("%s Lc" % format(get_upgrade_doomsayers_cost()))
+	if Globals.station_doomsayers_level == 10:
+		cost_label.set_text("Máximo nivel alcanzado.")
 
 func hide_labels():
 	cost_label.visible = false
@@ -39,11 +41,13 @@ func show_labels():
 	cost_label.visible = true
 
 func get_upgrade_doomsayers_cost():
-	return (Globals.station_doomsayers_level + 1) * 100
+	return (Globals.station_doomsayers_level + 1) * 100 * pow(2, Globals.station_doomsayers_level)
 
 func upgrade_doomsayers():
+	if Globals.station_doomsayers_level == 10:
+		return
 	var cost = get_upgrade_doomsayers_cost()
-	var wait_time = 5 * (Globals.station_doomsayers_level + 1)
+	var wait_time = 3 * (Globals.station_doomsayers_level + 1)
 	if Globals.money < cost:
 		Globals.play_error_sound()
 	else:

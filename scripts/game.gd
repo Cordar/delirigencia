@@ -26,7 +26,11 @@ var texture_altar1 = load("res://assets/images/altar1.png")
 var texture_altar2 = load("res://assets/images/altar2.png")
 var texture_altar3 = load("res://assets/images/altar3.png")
 
+var win_music = preload("res://assets/music/win_applause.wav")
+var audio_stream_player
+
 func _ready():
+	audio_stream_player = get_node("AudioMusic")
 	followers_label = get_node("InfoPanel/FollowersLabel")
 	follower_second_label = get_node("InfoPanel/FollowersSecondLabel")
 	money_label = get_node("InfoPanel/MoneyLabel")
@@ -56,7 +60,8 @@ func _process(_delta):
 		lose()
 
 func add_follower(quantity):
-	Globals.followers += quantity
+	var new_followers = Globals.followers + quantity
+	Globals.followers = min(new_followers, Globals.max_followers)
 	set_follower_label(Globals.followers)
 
 func set_follower_label(quantity):
@@ -90,6 +95,7 @@ func set_message(message):
 func win():
 	update_resources_timer.stop()
 	win_screen.visible = true
+	audio_stream_player.stream = win_music
 
 func lose():
 	update_resources_timer.stop()
@@ -133,6 +139,7 @@ func upgrade_church(wait_time):
 		station_church_progress_bar.visible = false
 		station_church_button.set_disabled(false)
 		Globals.station_church_level += 1
+		Globals.money_second_for_follower += 0.1 * Globals.station_church_level
 		station_church_cost_label.visible = true
 		set_church_labels()
 		set_church_texture()
@@ -145,9 +152,9 @@ func get_upgrade_church_cost():
 	elif Globals.station_church_level == 1:
 		return 100000
 	elif Globals.station_church_level == 2:
-		return 5000000000
+		return 500000000
 	elif Globals.station_church_level == 3:
-		return 420691548633947853
+		return 420691548633
 	else:
 		return 0
 
@@ -159,7 +166,7 @@ func get_upgrade_church_cost_followers():
 	elif Globals.station_church_level == 2:
 		return 8000000
 	elif Globals.station_church_level == 3:
-		return 8019876189
+		return Globals.max_followers
 	else:
 		return 0
 
