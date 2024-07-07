@@ -10,22 +10,24 @@ var timer
 var cost_label
 var anim_player
 var is_building = false
+var audio_stream_player
+var audio_timer
 
 signal upgrade_failed
 signal upgrade_succeeded(cost)
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	image = get_node("Image")
 	progress_bar = get_node("ProgressBar")
 	timer = get_node("Timer")
 	cost_label = get_node("Cost")
 	anim_player = get_node("AnimationPlayer")
+	audio_stream_player = get_node("AudioStreamPlayer")
+	audio_timer = get_node("AudioTimer")
 	set_labels()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	progress_bar.value = timer.time_left / timer.wait_time * 100
 
@@ -49,8 +51,10 @@ func upgrade_doomsayers():
 	var cost = get_upgrade_doomsayers_cost()
 	var wait_time = 3 * (Globals.station_doomsayers_level + 1)
 	if Globals.money < cost:
+		upgrade_failed.emit()
 		Globals.play_error_sound()
 	else:
+		upgrade_succeeded.emit(cost)
 		Globals.play_tap_sound()
 		anim_player.play("build")
 		set_disabled(true)
@@ -65,12 +69,14 @@ func upgrade_doomsayers():
 		progress_bar.visible = false
 		set_disabled(false)
 		Globals.station_doomsayers_level += 1
+		if Globals.station_doomsayers_level == 1:
+			audio_stream_player.play()
+			audio_timer.start()
 		show_labels()
 		set_labels()
 		set_texture()
 
 func _on_button_pressed():
-	print("pressed")
 	upgrade_doomsayers()
 
 func set_texture():
@@ -106,3 +112,7 @@ func format(n):
 			s = str(s,n[i])
 			
 	return s
+
+
+func _on_audio_timer_timeout():
+	audio_stream_player.play()

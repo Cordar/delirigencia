@@ -32,7 +32,7 @@ func play_error_sound():
 
 func play_hover_sound():
 	audio_stream_player.stream = sound_hover
-	audio_stream_player.volume_db = 5
+	audio_stream_player.volume_db = 0
 	play_sound()
 
 func play_sound():

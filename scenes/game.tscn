@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bglrsxf1kg5ax"]
+[gd_scene load_steps=13 format=3 uid="uid://bglrsxf1kg5ax"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_0hpx6"]
 [ext_resource type="FontFile" uid="uid://jxbyonhtwfel" path="res://assets/fonts/Chewy-Regular.ttf" id="1_mathn"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dqpgvgfi8pk45" path="res://scenes/station_doomsayers.tscn" id="5_hw7ax"]
 [ext_resource type="AudioStream" uid="uid://bswxuml05ieji" path="res://assets/music/music_delirigencia.wav" id="6_s5svw"]
 [ext_resource type="Texture2D" uid="uid://dcqtwsgmouctb" path="res://assets/images/followeicon.png" id="7_hsynj"]
+[ext_resource type="FontFile" uid="uid://b7yp10y67mi71" path="res://assets/fonts/static/JosefinSans-Regular.ttf" id="7_jp2h3"]
 [ext_resource type="Texture2D" uid="uid://bnb0aw6pbiouu" path="res://assets/images/moneyicon.png" id="9_v4ayh"]
 
 [sub_resource type="Theme" id="Theme_mqphj"]
@@ -93,17 +94,17 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="StationNews" parent="." instance=ExtResource("4_1wf2w")]
-offset_left = 179.0
-offset_top = 393.0
-offset_right = 700.0
-offset_bottom = 994.0
+offset_left = 261.0
+offset_top = 488.0
+offset_right = 692.0
+offset_bottom = 1012.0
 
 [node name="StationDoomsayers" parent="." instance=ExtResource("5_hw7ax")]
 layout_mode = 0
-offset_left = 1414.0
-offset_top = 235.0
-offset_right = 1914.0
-offset_bottom = 805.0
+offset_left = 1372.0
+offset_top = 307.0
+offset_right = 1852.0
+offset_bottom = 873.0
 
 [node name="UpdateResourcesTimer" type="Timer" parent="."]
 
@@ -115,11 +116,13 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -432.0
-offset_top = -85.0
+offset_top = -99.0
 offset_right = 436.0
+offset_bottom = -14.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_jp2h3")
 theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 
@@ -140,10 +143,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -523.0
-offset_top = -269.0
-offset_right = 509.0
-offset_bottom = -118.0
+offset_left = -762.0
+offset_top = -131.0
+offset_right = 794.0
+offset_bottom = -47.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "QUESTION?"
@@ -158,13 +161,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -672.0
-offset_top = -101.0
-offset_right = 676.0
-offset_bottom = 130.0
+offset_left = -861.0
+offset_top = 12.0
+offset_right = 875.0
+offset_bottom = 101.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("7_jp2h3")
+theme_override_font_sizes/font_size = 30
 max_text_lines = 2
 auto_height = true
 text_overrun_behavior = 0
@@ -364,6 +368,8 @@ autoplay = true
 [connection signal="pressed" from="StationChurchButton" to="." method="_on_create_final_structure_pressed"]
 [connection signal="upgrade_failed" from="StationNews" to="." method="_on_station_news_upgrade_failed"]
 [connection signal="upgrade_succeeded" from="StationNews" to="." method="_on_station_news_upgrade_succeeded"]
+[connection signal="upgrade_failed" from="StationDoomsayers" to="." method="_on_station_doomsayers_upgrade_failed"]
+[connection signal="upgrade_succeeded" from="StationDoomsayers" to="." method="_on_station_doomsayers_upgrade_succeeded"]
 [connection signal="timeout" from="UpdateResourcesTimer" to="." method="_on_update_resources_timer_timeout"]
 [connection signal="item_clicked" from="IntroScreen/InitialInterview" to="." method="_on_initial_interview_item_clicked"]
 [connection signal="pressed" from="GameOverScreen/Button" to="." method="_on_button_pressed"]

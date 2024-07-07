@@ -73,6 +73,7 @@ func set_follower_label(quantity):
 		follower_second_label.text = "(%d)" % generation_second
 
 func add_money(quantity):
+	print(quantity)
 	Globals.money += quantity
 	set_money_label(Globals.money)
 

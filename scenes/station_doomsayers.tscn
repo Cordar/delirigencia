@@ -1,24 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dqpgvgfi8pk45"]
+[gd_scene load_steps=12 format=3 uid="uid://dqpgvgfi8pk45"]
 
 [ext_resource type="Script" path="res://scripts/station_doomsayers.gd" id="1_3ow5x"]
 [ext_resource type="Texture2D" uid="uid://673o75iw6jih" path="res://assets/images/doomsayer0.png" id="1_au84e"]
-
-[sub_resource type="Animation" id="Animation_j8gsb"]
-resource_name = "build"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Image:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.05, 0.95), Vector2(1, 1), Vector2(0.95, 1.05), Vector2(1, 1)]
-}
+[ext_resource type="AudioStream" uid="uid://dxkbcfcspo8i2" path="res://assets/music/despierta.wav" id="3_rdvda"]
+[ext_resource type="AudioStream" uid="uid://dstaalmxcpb6e" path="res://assets/music/quenoteenganyen.wav" id="4_hbctw"]
+[ext_resource type="AudioStream" uid="uid://dsjni47u6qw26" path="res://assets/music/you_belong_to_us.mp3" id="5_4p00a"]
 
 [sub_resource type="Animation" id="Animation_2xuls"]
 length = 0.001
@@ -59,6 +45,23 @@ tracks/2/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_j8gsb"]
+resource_name = "build"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Image:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 0.95), Vector2(1, 1), Vector2(0.95, 1.05), Vector2(1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_m3nfc"]
 resource_name = "idle"
 length = 2.0
@@ -88,12 +91,26 @@ tracks/1/keys = {
 "values": [false, true, false]
 }
 
+[sub_resource type="Animation" id="Animation_0rbin"]
+resource_name = "static"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1d56v"]
 _data = {
 "RESET": SubResource("Animation_2xuls"),
 "build": SubResource("Animation_j8gsb"),
-"idle": SubResource("Animation_m3nfc")
+"idle": SubResource("Animation_m3nfc"),
+"static": SubResource("Animation_0rbin")
 }
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_d2jth"]
+streams_count = 3
+playback_mode = 1
+stream_0/stream = ExtResource("3_rdvda")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("4_hbctw")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("5_4p00a")
+stream_2/weight = 1.0
 
 [node name="StationDoomsayers" type="TextureButton"]
 offset_right = 500.0
@@ -148,10 +165,19 @@ grow_vertical = 2
 texture = ExtResource("1_au84e")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "static"
 libraries = {
 "": SubResource("AnimationLibrary_1d56v")
 }
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_d2jth")
+volume_db = -5.0
+
+[node name="AudioTimer" type="Timer" parent="."]
+wait_time = 15.0
+
 [connection signal="mouse_entered" from="." to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="." to="." method="_on_button_pressed"]
+[connection signal="timeout" from="AudioTimer" to="." method="_on_audio_timer_timeout"]

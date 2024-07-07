@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dif7lcsvcfeeq"]
+[gd_scene load_steps=5 format=3 uid="uid://dif7lcsvcfeeq"]
 
 [ext_resource type="Script" path="res://scripts/select_event_screen.gd" id="1_cfvfg"]
 [ext_resource type="PackedScene" uid="uid://ctu5cq48qgh3c" path="res://scenes/event_option.tscn" id="1_qa7pj"]
 [ext_resource type="Texture2D" uid="uid://c64330835orx3" path="res://assets/images/textbar.png" id="2_08j6r"]
+[ext_resource type="FontFile" uid="uid://b7yp10y67mi71" path="res://assets/fonts/static/JosefinSans-Regular.ttf" id="3_hiu8b"]
 
 [node name="EventScreen" type="Control"]
 layout_mode = 3
@@ -23,7 +24,6 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.941176)
 
 [node name="ShowEffect" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,13 +38,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -935.0
-offset_top = -292.0
-offset_right = 921.0
+offset_left = -577.0
+offset_top = -298.0
+offset_right = 581.0
 offset_bottom = 142.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_08j6r")
+expand_mode = 2
 
 [node name="Label" type="Label" parent="ShowEffect"]
 layout_mode = 1
@@ -58,6 +59,7 @@ offset_right = -170.0
 offset_bottom = 102.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_hiu8b")
 theme_override_font_sizes/font_size = 36
 text = "Un hombre en su casa descubre la realidad del planeta y esa misma tarde…
 Manoli: Antonio va, ve a pasear, ya sabes que el médico…
@@ -102,6 +104,7 @@ text = "No quiero!"
 text_overrun_behavior = 4
 
 [node name="Option1" parent="." instance=ExtResource("1_qa7pj")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -116,6 +119,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Option2" parent="." instance=ExtResource("1_qa7pj")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -128,6 +132,8 @@ offset_right = 885.0
 offset_bottom = 541.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="pressed" from="ShowEffect/Button" to="." method="_on_effect_result_button_pressed"]
 [connection signal="pressed" from="ShowEffect/Button2" to="." method="_on_button_2_pressed"]
