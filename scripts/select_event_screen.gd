@@ -132,7 +132,7 @@ var events = [
 		id = 2,
 		title = "Los gatos conquistarán el mundo",
 		description = "Compartes por todas las redes sociales unas impactantes imágenes de gatos que parecen ocultar sus intenciones de dominación mundial. Al fin y al cabo, ¿a quién no le gustan las imágenes de gatitos?",
-		image = "",
+		image = texture_cats,
 		effect = "Ahhhh!!! Nos invaden los gatoligenas!!! Quién iba a decir que eran reales??? ACABA CON ELLOS ANTES DE QUE SEA DEMASIADO MIAURDEEE. Hasta repeler la invasión tus seguidores te abandonan para ir a acariciar estas bolitas de pelo"
 	},
 	{
