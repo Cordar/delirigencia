@@ -9,13 +9,13 @@ var money_label
 var money_second_label
 
 var SelectEventScreen = preload("res://scenes/select_event_screen.tscn")
+var PowerUp = preload("res://scenes/power_up_generator.tscn")
 var intro_screen
-var win_screen
-var game_over_screen
 
 var game_running = false
 
 var update_resources_timer
+var powerup_timer
 
 var station_church_button
 var station_church_progress_bar
@@ -26,22 +26,21 @@ var texture_altar1 = load("res://assets/images/altar1.png")
 var texture_altar2 = load("res://assets/images/altar2.png")
 var texture_altar3 = load("res://assets/images/altar3.png")
 
-var win_music = preload("res://assets/music/win_applause.wav")
 var audio_stream_player
+var caching_audio_player
 
 func _ready():
 	audio_stream_player = get_node("AudioMusic")
+	caching_audio_player = $CachingAudioPlayer
 	followers_label = get_node("InfoPanel/FollowersLabel")
 	follower_second_label = get_node("InfoPanel/FollowersSecondLabel")
 	money_label = get_node("InfoPanel/MoneyLabel")
 	money_second_label = get_node("InfoPanel/MoneySecondLabel")
 	message_label = get_node("MessageLabel")
 
-	win_screen = get_node("WinScreen")
-	game_over_screen = get_node("GameOverScreen")
-
 	intro_screen = get_node("IntroScreen")
 	update_resources_timer = get_node("UpdateResourcesTimer")
+	powerup_timer = get_node("PowerupTimer")
 
 	station_church_button = get_node("StationChurchButton")
 	set_church_texture()
@@ -54,14 +53,16 @@ func _ready():
 
 	set_intro()
 	
-func _process(_delta):
+func _process(delta):
 	station_church_progress_bar.value = station_church_timer.time_left / station_church_timer.wait_time * 100
-	if game_running and Globals.money < 0 or Globals.followers < 0:
+	if game_running and Globals.money < 0 or Globals.followers < 1:
 		lose()
+
+	Globals.game_time += delta
 
 func add_follower(quantity):
 	var new_followers = Globals.followers + quantity
-	Globals.followers = min(new_followers, Globals.max_followers)
+	Globals.followers = max(min(new_followers, Globals.max_followers), 0)
 	set_follower_label(Globals.followers)
 
 func set_follower_label(quantity):
@@ -94,13 +95,14 @@ func set_message(message):
 	message_label.text = ""
 
 func win():
-	update_resources_timer.stop()
-	win_screen.visible = true
-	audio_stream_player.stream = win_music
+	get_tree().change_scene_to_file("res://scenes/win_screen.tscn")
 
 func lose():
-	update_resources_timer.stop()
-	game_over_screen.visible = true
+	get_tree().change_scene_to_file("res://scenes/game_over_screen.tscn")
+
+func generate_resources(times):
+	add_money(Globals.followers * Globals.money_second_for_follower * times)
+	add_follower(Globals.station_doomsayers_level * Globals.follower_multiplier * times)
 
 func _on_update_resources_timer_timeout():
 	add_money_gradually(Globals.followers * Globals.money_second_for_follower)
@@ -179,7 +181,7 @@ func _on_create_final_structure_pressed():
 	elif Globals.station_church_level == 2:
 		upgrade_church(30.0)
 	elif Globals.station_church_level == 3:
-		upgrade_church(60.0)
+		upgrade_church(5.0)
 
 
 
@@ -257,6 +259,15 @@ var questions = [
 			"Para llevar la contraria a alguien."
 			],
 	},
+	{
+		"question": "Consigue construir el altar al nivel máximo para ganar.",
+		"answers": [
+			"ok",
+			"??????",
+			"Eso haré!",
+			"Entendido, jefe."
+			],
+	}
 ]
 var select_list
 var question_label
@@ -275,6 +286,7 @@ func set_next_intro_question():
 		set_follower_label(Globals.followers)
 		intro_screen.visible = false
 		update_resources_timer.start()
+		powerup_timer.start()
 		game_running = true
 		return
 	
@@ -409,3 +421,19 @@ func _on_station_church_button_mouse_entered():
 
 func _on_station_church_button_mouse_exited():
 	station_church_button.set_scale(Vector2(1, 1))
+
+var power_up_times_generated = 30
+func _on_powerup_picked_up():
+	caching_audio_player.play()
+	generate_resources(power_up_times_generated)
+	if power_up_times_generated < 240:
+		power_up_times_generated += 15
+
+func _on_powerup_timer_timeout():
+	var powerup = PowerUp.instantiate()
+	powerup.set_position(Vector2(2000, randi() % 800 + 100))
+	powerup.set_scale(Vector2(0.5, 0.5))
+	powerup.speed = (randi() % 30) + 200
+	powerup.picked_up.connect(_on_powerup_picked_up)
+	add_child(powerup)
+	powerup_timer.wait_time = max(powerup_timer.wait_time - 0.5, 2.0)

@@ -1,0 +1,103 @@
+[gd_scene load_steps=11 format=3 uid="uid://6jkolvl3bxeo"]
+
+[ext_resource type="Script" path="res://scripts/power_up_generator.gd" id="1_evddm"]
+[ext_resource type="Texture2D" uid="uid://bnb0aw6pbiouu" path="res://assets/images/moneyicon.png" id="2_6ppcs"]
+[ext_resource type="Texture2D" uid="uid://dcqtwsgmouctb" path="res://assets/images/followeicon.png" id="3_nxh6l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_45jek"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c27wq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d6e4d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f1vgo"]
+
+[sub_resource type="Animation" id="Animation_jfxc7"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-100, -105), Vector2(-100, 0), Vector2(-100, -105)]
+}
+
+[sub_resource type="Animation" id="Animation_6ghqh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-100, -105)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pjs0s"]
+_data = {
+"RESET": SubResource("Animation_6ghqh"),
+"idle": SubResource("Animation_jfxc7")
+}
+
+[node name="PowerUp" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -100.0
+offset_top = -105.0
+offset_right = 100.0
+offset_bottom = 112.0
+script = ExtResource("1_evddm")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.5
+offset_right = -15.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_6ppcs")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 23.5
+offset_right = 40.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_nxh6l")
+expand_mode = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_45jek")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_c27wq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_d6e4d")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_f1vgo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pjs0s")
+}
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

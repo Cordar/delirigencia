@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bglrsxf1kg5ax"]
+[gd_scene load_steps=16 format=3 uid="uid://bglrsxf1kg5ax"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_0hpx6"]
 [ext_resource type="FontFile" uid="uid://jxbyonhtwfel" path="res://assets/fonts/Chewy-Regular.ttf" id="1_mathn"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://dcqtwsgmouctb" path="res://assets/images/followeicon.png" id="7_hsynj"]
 [ext_resource type="FontFile" uid="uid://b7yp10y67mi71" path="res://assets/fonts/static/JosefinSans-Regular.ttf" id="7_jp2h3"]
 [ext_resource type="Texture2D" uid="uid://bnb0aw6pbiouu" path="res://assets/images/moneyicon.png" id="9_v4ayh"]
+[ext_resource type="AudioStream" uid="uid://bn5dfmys58ck6" path="res://assets/music/caching.mp3" id="11_12r1i"]
+[ext_resource type="AudioStream" uid="uid://c1ao7yjf8q2mk" path="res://assets/music/caching.wav" id="11_jlru1"]
 
 [sub_resource type="Theme" id="Theme_mqphj"]
 default_font = ExtResource("1_mathn")
@@ -19,6 +21,14 @@ font_size = 48
 outline_size = 3
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 8
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_guifr"]
+streams_count = 2
+playback_mode = 1
+stream_0/stream = ExtResource("11_12r1i")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("11_jlru1")
+stream_1/weight = 0.2
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -94,10 +104,10 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="StationNews" parent="." instance=ExtResource("4_1wf2w")]
-offset_left = 261.0
-offset_top = 488.0
-offset_right = 692.0
-offset_bottom = 1012.0
+offset_left = 229.0
+offset_top = 427.0
+offset_right = 660.0
+offset_bottom = 951.0
 
 [node name="StationDoomsayers" parent="." instance=ExtResource("5_hw7ax")]
 layout_mode = 0
@@ -172,91 +182,6 @@ theme_override_font_sizes/font_size = 30
 max_text_lines = 2
 auto_height = true
 text_overrun_behavior = 0
-
-[node name="GameOverScreen" type="ColorRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.552956, 0.552956, 0.552956, 1)
-
-[node name="Label" type="Label" parent="GameOverScreen"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -189.5
-offset_top = -59.0
-offset_right = 189.5
-offset_bottom = 59.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Tu secta ha sido un fracaso
-"
-label_settings = SubResource("LabelSettings_h1fo3")
-horizontal_alignment = 1
-
-[node name="Button" type="Button" parent="GameOverScreen"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -58.0
-offset_top = 9.5
-offset_right = 58.0
-offset_bottom = 38.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "No es más fuerte el que menos cae, sino el que más veces se levanta."
-
-[node name="WinScreen" type="ColorRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.552956, 0.552956, 0.552956, 1)
-
-[node name="Label" type="Label" parent="WinScreen"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -189.5
-offset_top = -59.0
-offset_right = 189.5
-offset_bottom = 59.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "El mundo se ha vuelto loco y te has lucrado por ello. Enhorabuena?"
-label_settings = SubResource("LabelSettings_h1fo3")
-horizontal_alignment = 1
-
-[node name="Button" type="Button" parent="WinScreen"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -27.5
-offset_top = 17.5
-offset_right = 27.5
-offset_bottom = 46.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Has tenido suerte esta vez, quieres volver a fracasar? Pulsa aquí"
 
 [node name="InfoPanel" type="Control" parent="."]
 anchors_preset = 0
@@ -363,6 +288,13 @@ stream = ExtResource("6_s5svw")
 volume_db = -15.0
 autoplay = true
 
+[node name="PowerupTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="CachingAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_guifr")
+volume_db = -5.0
+
 [connection signal="mouse_entered" from="StationChurchButton" to="." method="_on_station_church_button_mouse_entered"]
 [connection signal="mouse_exited" from="StationChurchButton" to="." method="_on_station_church_button_mouse_exited"]
 [connection signal="pressed" from="StationChurchButton" to="." method="_on_create_final_structure_pressed"]
@@ -372,5 +304,4 @@ autoplay = true
 [connection signal="upgrade_succeeded" from="StationDoomsayers" to="." method="_on_station_doomsayers_upgrade_succeeded"]
 [connection signal="timeout" from="UpdateResourcesTimer" to="." method="_on_update_resources_timer_timeout"]
 [connection signal="item_clicked" from="IntroScreen/InitialInterview" to="." method="_on_initial_interview_item_clicked"]
-[connection signal="pressed" from="GameOverScreen/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="WinScreen/Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="PowerupTimer" to="." method="_on_powerup_timer_timeout"]

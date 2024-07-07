@@ -102,7 +102,7 @@ func apply_effect():
 		Globals.follower_multiplier *= 30
 	elif id == 2:
 		audio_stream_player.stream = negative_event
-		Globals.follower_multiplier *= -100
+		Globals.followers = 0
 	elif id == 3:
 		audio_stream_player.stream = positive_event
 		Globals.follower_multiplier *= 10

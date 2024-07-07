@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://dqpgvgfi8pk45"]
+[gd_scene load_steps=14 format=3 uid="uid://dqpgvgfi8pk45"]
 
 [ext_resource type="Script" path="res://scripts/station_doomsayers.gd" id="1_3ow5x"]
 [ext_resource type="Texture2D" uid="uid://673o75iw6jih" path="res://assets/images/doomsayer0.png" id="1_au84e"]
 [ext_resource type="AudioStream" uid="uid://dxkbcfcspo8i2" path="res://assets/music/despierta.wav" id="3_rdvda"]
 [ext_resource type="AudioStream" uid="uid://dstaalmxcpb6e" path="res://assets/music/quenoteenganyen.wav" id="4_hbctw"]
 [ext_resource type="AudioStream" uid="uid://dsjni47u6qw26" path="res://assets/music/you_belong_to_us.mp3" id="5_4p00a"]
+[ext_resource type="AudioStream" uid="uid://do5vyqchyewqu" path="res://assets/music/el_final_cerca.wav" id="6_sv10l"]
+[ext_resource type="AudioStream" uid="uid://b5yeasbtpi7ln" path="res://assets/music/acepta_palabra.wav" id="7_cdbmf"]
 
 [sub_resource type="Animation" id="Animation_2xuls"]
 length = 0.001
@@ -103,7 +105,7 @@ _data = {
 }
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_d2jth"]
-streams_count = 3
+streams_count = 5
 playback_mode = 1
 stream_0/stream = ExtResource("3_rdvda")
 stream_0/weight = 1.0
@@ -111,6 +113,10 @@ stream_1/stream = ExtResource("4_hbctw")
 stream_1/weight = 1.0
 stream_2/stream = ExtResource("5_4p00a")
 stream_2/weight = 1.0
+stream_3/stream = ExtResource("6_sv10l")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("7_cdbmf")
+stream_4/weight = 1.0
 
 [node name="StationDoomsayers" type="TextureButton"]
 offset_right = 500.0

@@ -2,12 +2,13 @@ extends Node
 
 var money = 0
 var money_second_for_follower = 0.1
-var followers = 0
+var followers = 1
 var max_followers = 8019876189
 var follower_multiplier = 1
 var station_doomsayers_level = 0
 var station_news_level = 0
 var station_church_level = 0
+var game_time = 0
 
 var audio_stream_player
 var sound_tap = load("res://assets/music/tap.wav")
@@ -41,8 +42,9 @@ func play_sound():
 func reset():
 	money = 0
 	money_second_for_follower = 0.1
-	followers = 0
+	followers = 1
 	follower_multiplier = 1
 	station_doomsayers_level = 0
 	station_news_level = 0
 	station_church_level = 0
+	game_time = 0

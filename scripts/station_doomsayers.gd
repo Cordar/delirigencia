@@ -85,8 +85,10 @@ func set_texture():
 		image.set_texture(texture1)
 	elif lvl == 5:
 		image.set_texture(texture2)
+		Globals.follower_multiplier *= 3
 	elif lvl == 10:
 		image.set_texture(texture3)
+		Globals.follower_multiplier *= 10
 
 
 func _on_button_mouse_entered():

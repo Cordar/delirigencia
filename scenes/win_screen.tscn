@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=3 uid="uid://chqfn87nf8a84"]
+
+[ext_resource type="Script" path="res://scripts/game_over_screen.gd" id="1_72rik"]
+[ext_resource type="AudioStream" uid="uid://brubaj1a732nb" path="res://assets/music/win_applause.wav" id="1_uywke"]
+[ext_resource type="PackedScene" uid="uid://dyq5kjhnqocfg" path="res://scenes/final_results_info.tscn" id="3_bljbw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h1fo3"]
+font_size = 48
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 8
+
+[node name="WinScreen" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.197937, 0.197937, 0.197937, 1)
+script = ExtResource("1_72rik")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -914.0
+offset_top = 142.0
+offset_right = 849.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "El mundo se ha vuelto loco y te has lucrado por ello. ¿Enhorabuena?"
+label_settings = SubResource("LabelSettings_h1fo3")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -308.0
+offset_top = 282.0
+offset_right = 308.0
+offset_bottom = 349.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Has tenido suerte esta vez, ¿quieres volver a fracasar? Pulsa aquí"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_uywke")
+volume_db = -5.0
+autoplay = true
+
+[node name="FinalResultsInfo" parent="." instance=ExtResource("3_bljbw")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -514.0
+offset_top = -503.0
+offset_right = 610.0
+offset_bottom = 210.0
+
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
